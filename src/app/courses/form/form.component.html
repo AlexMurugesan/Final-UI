@@ -1,0 +1,42 @@
+<div class="container">
+    <h3 style="text-align: center">Add Session</h3>
+    <form [formGroup]="TrainerAllocationForm">
+        <div class="row">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4">
+                <label>Course Name</label>
+                <select class="form-control" formControlName="course_id" [(ngModel)]="cid" (change)='loadTrainers()'>
+                    <option *ngFor="let x of courses" [value]=x.course_id>{{x.course_name}}</option>
+                </select>
+
+                <label>Trainer Name</label>
+                <select class="form-control" formControlName="trainer_id" [(ngModel)]="tid" (change)='loadBackUp()'>
+                    <option *ngFor="let t of trainers" [value]=t.trainerId>{{t.trainerName}}</option>
+                </select>
+
+                <label>Back-up Trainer</label>
+                <select class="form-control" formControlName="backup_trainer_id">
+                    <option *ngFor="let b of trainersDummy" [value]=b.trainerId>{{b.trainerName}}</option>
+                </select>
+
+                <label>Start Time</label>
+                <input class="form-control" formControlName="startTime" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                <owl-date-time #dt></owl-date-time>
+
+                <label>End Time</label>
+                <input class="form-control" formControlName="endTime" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                <owl-date-time #dt1></owl-date-time>
+
+                <label>Comments</label>
+                <textarea formControlName="comment" class="md-textarea form-control" rows="3"></textarea>
+
+                <button class="btn btn-danger" [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
+
+                <datetime-popup [(value)]="myDate"></datetime-popup>
+            </div>
+            <div class="col-sm-4">
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,49 @@
+<div>
+
+  <div class="card text-center" style="height: 100%">
+    <div class="card-body" style="color: black">
+      <h1 class="card-title">Course Management</h1>
+    </div>
+  </div>
+
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <button style="color: black" [ngClass]="arg=='coursemanagement' ? 'nav-link active' : 'nav-link'"
+          (click)="course('coursemanagement')">Course Management</button>
+      </li>
+      <li class="nav-item">
+        <button style="color:rgb(14, 28, 34)" [ngClass]="arg=='trainermanagement' ? 'nav-link active' : 'nav-link'"
+          (click)="course('trainermanagement')">Trainer Management</button>
+      </li>
+      <li class="nav-item">
+        <button style="color: rgb(14, 28, 34)" [ngClass]="arg=='formaddition' ? 'nav-link active' : 'nav-link'"
+          (click)="course('formaddition')">Add Session</button>
+      </li>
+      <li class="nav-item">
+        <button style="color: rgb(14, 28, 34)" [ngClass]="arg=='viewsession' ? 'nav-link active' : 'nav-link'"
+          (click)="course('viewsession')">View Session</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container">
+
+    <div *ngIf="arg=='coursemanagement'">
+      <app-cmanage></app-cmanage>
+    </div>
+    <div *ngIf="arg=='trainermanagement'">
+      <app-tmanage></app-tmanage>
+    </div>
+    <div *ngIf="arg=='formaddition'">
+      <app-form></app-form>
+    </div>
+    <div *ngIf="arg=='viewsession'">
+      <app-view></app-view>
+    </div>
+
+  </div>
+
+
+
+</div>
