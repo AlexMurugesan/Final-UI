@@ -64,10 +64,10 @@ onSubmit(form: NgForm): void {
     {
       this.courses.forEach(element=>
         {
-          if(id==element.course_id)
-          {
-            this.courseNewArray.push(element);
-          }
+          // if(id==element.course_id)
+          // {
+          //   this.courseNewArray.push(element);
+          // }
         })
     });
     console.log("coursenewarray"+this.courseNewArray);

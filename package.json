@@ -23,6 +23,7 @@
     "@angular/router": "~8.0.1",
     "@syncfusion/ej2-angular-dropdowns": "^17.1.49",
     "angular-font-awesome": "^3.1.2",
+    "angular2-datetimepicker": "^1.1.1",
     "bootstrap": "^3.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",

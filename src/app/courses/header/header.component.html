@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
 
   <div class="card text-center" style="height: 100%">
     <div class="card-body" style="color: black">
@@ -46,4 +46,27 @@
 
 
 
-</div>
+</div> -->
+
+<!-- <select
+[(ngModel)]="selectedCity"
+(ngModelChange)="onCitySelect($event)"
+class="province-menu">
+    <option [ngValue]="null" selected>City</option>
+    <option
+    *ngFor="let cities of city"
+    [ngValue]="cities"
+    [disabled]="cities.disable">
+        {{ cities.name }}
+    </option>
+</select> -->
+
+
+<select (change)="onNavigate($event.target.value)">
+  <option value="/view" [selected]="select=='View'">View</option>
+  <option value="/course"  [selected]="select=='AddCourse'">Add Course</option>
+  <option value="/trainer" [selected]="select=='AddTrainer'">Add Trainer</option>
+  <option value="/batch" [selected]="select=='AddBatch'">Add Batch</option>
+  
+</select>
+

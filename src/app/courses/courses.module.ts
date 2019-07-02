@@ -15,6 +15,7 @@ import { ViewComponent } from './view/view.component';
 import * as moment from 'moment';
 import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -29,7 +30,13 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
     NgMultiSelectDropDownModule.forRoot(),
     MatSelectModule,
     MultiSelectAllModule,
-    AngularDateTimePickerModule
+    AngularDateTimePickerModule,
+    RouterModule.forChild([
+      { path: 'view', component: ViewComponent },
+      { path: 'course', component: CmanageComponent },
+      { path: 'trainer', component: TmanageComponent },
+      { path: 'batch', component: FormComponent },
+    ])
    
     
 //    BrowserModule,
