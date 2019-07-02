@@ -86,6 +86,9 @@ deleteTrainer(tid: number) {
   this.service.deleteTrainer(tid).subscribe(data => {
     this.ngOnInit();
     alert("Deleted successfully");
+  },err=>
+  {
+    alert("Trainer is alreaady set as Backup trainer.Hence We can't delete it.")
   });
 }
 

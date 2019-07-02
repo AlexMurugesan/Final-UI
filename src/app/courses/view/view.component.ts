@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TrainerAllocation } from './RequiredClasses';
 
-import {  ElementRef, TemplateRef } from '@angular/core';
+import { ElementRef, TemplateRef } from '@angular/core';
 // import {
 //   PopupService,
 //   PopupRef
@@ -21,7 +21,7 @@ export class ViewComponent implements OnInit {
     updateTrainer: TrainerAllocation;
     // private popupRef: PopupRef;
 
-    
+
     //isDisabled=true;
     datePipe = new DatePipe('en-US');
     datewiseSessions = new Map<string, TrainerAllocation[]>();
@@ -30,17 +30,13 @@ export class ViewComponent implements OnInit {
     ngOnInit() {
         this.service.viewSessions().subscribe(data => {
             this.sessions = data;
-            console.log(this.sessions);
+            // console.log(this.sessions);
             this.sortSessionsByDate();
             this.createDateWiseSessions();
-            console.log(this.datewiseSessions);
+            // console.log(this.datewiseSessions);
             //this.isDisabled=false;
         })
     }
-
-
-
-
 
     public sortSessionsByDate(): void {
         this.sessions.sort((a: TrainerAllocation, b: TrainerAllocation) => {
@@ -55,13 +51,15 @@ export class ViewComponent implements OnInit {
             }
             else {
                 this.datewiseSessions.set(this.datePipe.transform(element.start_time, dateFormat), [element]);
-
             }
         });
     }
 
     redirectToAdd(tid: number) {
-        this.service.getObject(tid).subscribe(); 
+        this.service.getObject(tid).subscribe(data=>
+            {
+                this.ngOnInit();
+            });
         // this.sessions.forEach(data=>this.sessions.pop());
         // this.sessions.forEach(data=>
         //     if(data.trainer_allocation_id==tid){
@@ -74,9 +72,8 @@ export class ViewComponent implements OnInit {
         //     this.sortSessionsByDate();
         //     this.createDateWiseSessions();
         //     console.log(this.datewiseSessions);
-            //this.isDisabled=false;
+        //this.isDisabled=false;
         // })
-        this.ngOnInit();
     }
 
 }

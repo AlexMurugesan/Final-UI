@@ -14,9 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { ViewComponent } from './view/view.component';
 import * as moment from 'moment';
 import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
-import { DatepickerModule } from 'ngx-bootstrap/datepicker';
-import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { DatetimePopupModule } from 'ngx-bootstrap-datetime-popup';
+import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 
 
 @NgModule({
@@ -31,9 +29,7 @@ import { DatetimePopupModule } from 'ngx-bootstrap-datetime-popup';
     NgMultiSelectDropDownModule.forRoot(),
     MatSelectModule,
     MultiSelectAllModule,
-    DatepickerModule.forRoot(),
-    TimepickerModule.forRoot(),
-    DatetimePopupModule.forRoot()
+    AngularDateTimePickerModule
    
     
 //    BrowserModule,

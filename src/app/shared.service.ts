@@ -16,13 +16,13 @@ export class SharedService {
   addCourse_url=this.getCourses_url+"/add"
   deleteCourse_url=this.getCourses_url+"/";
   getTrainers_url=this._url+'trainer';
-  deleteTrainer_url=this.getTrainers_url+"/"
-  
+  deleteTrainer_url=this.getTrainers_url+"/" 
   addSessionURL=this._url+'trainerAllocation';
   viewSessionsUrl=this._url+'trainerAllocation';
+  deleteRow=this.viewSessionsUrl+'/delete/'
+
 //  sessionCourses=this._url;
   sessionTrainers=this._url+'trainer/course/';
-  deleteRow=this.viewSessionsUrl+'/delete/'
 
   constructor(private http: HttpClient) {
     }
@@ -65,6 +65,19 @@ export class SharedService {
       return this.http.delete(this.deleteTrainer_url+tid,this.httpOptions);
     }
 
+    addSession(trainerAllocation:any[]) 
+    {
+      console.log(trainerAllocation);
+      return this.http.post(this.addSessionURL,trainerAllocation,this.httpOptions)
+    }
+
+    viewSessions():Observable<TrainerAllocation[]>
+    {
+      return this.http.get<TrainerAllocation[]>(this.viewSessionsUrl);
+    }
+  
+  
+
   
 
 
@@ -85,14 +98,6 @@ export class SharedService {
     return this.http.get<TrainerAllocation[]>('/assets/Data/trainerAllocation.json');
   }
 
-  addSession(trainerAllocation:any[]) {
-    console.log(trainerAllocation);
-    return this.http.post(this.addSessionURL,trainerAllocation,this.httpOptions)
-  }
-  viewSessions():Observable<TrainerAllocation[]>
-  {
-    return this.http.get<TrainerAllocation[]>(this.viewSessionsUrl);
-  }
 
   getObject(tid:number)
   {

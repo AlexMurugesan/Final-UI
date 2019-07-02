@@ -14,7 +14,7 @@ import { element } from 'protractor';
 export class CmanageComponent implements OnInit {
 
   courseList: Course[] = [];
-  courseObj: Course = new Course();
+  courseObj: Course = new Course(null,null);
   courseName: string = null;
   alreadyPresent = false;
   toDelete: boolean = true;

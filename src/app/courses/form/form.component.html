@@ -21,19 +21,22 @@
                 </select>
 
                 <label>Start Time</label>
-                <input class="form-control" formControlName="startTime" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
-                <owl-date-time #dt></owl-date-time>
+                <angular2-date-picker formControlName="startTime" [(ngModel)]="date" [settings]="settings"
+                style="padding: 0.1rem 0.1rem"></angular2-date-picker>
+                <!-- <input class="form-control" formControlName="startTime" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                <owl-date-time #dt></owl-date-time> -->
 
                 <label>End Time</label>
-                <input class="form-control" formControlName="endTime" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                <owl-date-time #dt1></owl-date-time>
+                <angular2-date-picker formControlName="endTime" [(ngModel)]="date1" [settings]="settings"
+                style="padding: 0.1rem 0.1rem"></angular2-date-picker>
+                <!-- <input class="form-control" formControlName="endTime" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                <owl-date-time #dt1></owl-date-time> -->
 
                 <label>Comments</label>
                 <textarea formControlName="comment" class="md-textarea form-control" rows="3"></textarea>
 
                 <button class="btn btn-danger" [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
 
-                <datetime-popup [(value)]="myDate"></datetime-popup>
             </div>
             <div class="col-sm-4">
             </div>

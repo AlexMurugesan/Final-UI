@@ -13,7 +13,7 @@ export class TrainerAllocation
     trainer_allocation_id:number;
     course:Course;
     trainer:Trainer
-    backup_trainer:Trainer;
+    backupTrainer:Trainer;
     comment:string;
     start_time:Date;
     end_time:Date;
