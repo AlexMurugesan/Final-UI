@@ -6,6 +6,9 @@
             <div class="col-sm-4">
             </div>
             <div class="col-sm-4">
+                <label>Batch Name</label>
+                <input type="text" id="batchName" [(ngModel)]="batchName"/>
+
                 <label>Course Name</label>
                 <select class="form-control" formControlName="course_id" [(ngModel)]="cid" (change)='loadTrainers()'>
                     <option *ngFor="let x of courses" [value]=x.course_id>{{x.course_name}}</option>
@@ -43,4 +46,59 @@
             </div>
         </div>
     </form>
+
+
+
+
+
+
+
+    <h3 style="text-align: center">Time Schedule</h3><br>
+    <div>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <th>Date</th>
+        <th>Course</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Trainer</th>
+        <th>Back Up Trainer</th>
+        <th>Comments</th>
+        <th>Remove</th>
+      </thead>
+      <ng-container *ngFor="let recipient of datewiseSessions | keyvalue">
+        <tr>
+          <td [attr.rowspan]="recipient.value.length">{{recipient.key}}
+          </td>
+          <td>{{recipient.value[0].course.course_name}}</td>
+          <td>{{recipient.value[0].start_time|date:'HH:mm a'}}</td>
+          <td>{{recipient.value[0].end_time|date:'HH:mm a'}}</td>
+          <td>{{recipient.value[0].trainer.trainer_name}}</td>
+          <td><span
+              *ngIf="recipient.value[0].backup_trainer!=undefined">{{recipient.value[0].backupTrainer.trainer_name}}</span>
+          </td>
+          <td>{{recipient.value[0].comment}}</td>
+          <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteCourse(course.course_id)">
+            <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td>
+  
+        </tr>
+        <ng-container *ngFor="let data of recipient.value; let i= index;">
+          <tr *ngIf="i!=0">
+            <td>{{recipient.value[i].course.course_name}}</td>
+            <td>{{recipient.value[i].start_time|date:'h:mm a'}}</td>
+            <td>{{recipient.value[i].end_time|date:'h:mm a'}}</td>
+            <td>{{recipient.value[i].trainer.trainer_name}}</td>
+            <td><span
+                *ngIf="recipient.value[i].backup_trainer!=undefined">{{recipient.value[i].backupTrainer.trainer_name}}</span>
+            </td>
+            <td>{{recipient.value[i].comment}}</td>
+            <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteCourse(course.course_id)">
+              <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td>
+    </tr>
+        </ng-container>
+      </ng-container>
+    </table>
+  </div>
+  
 </div>
+
