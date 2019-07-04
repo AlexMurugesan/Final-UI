@@ -17,4 +17,19 @@ export class TrainerAllocation
     comment:string;
     start_time:Date;
     end_time:Date;
+    batch_id:number;
+}
+export class Batch
+{
+    batchId:number;
+    batchName:string;
+    batchYear:number;
+    trainerAllocation:TrainerAllocation[];
+    constructor(batchName:string)
+    {
+        this.batchId=null;
+        this.batchName=batchName;
+        this.batchYear=null;
+        this.trainerAllocation=[];
+    }
 }

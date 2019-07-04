@@ -22,27 +22,27 @@ export class TmanageComponent implements OnInit {
   trainer:Trainer;
   sel:any=[];
   public value: number[] = [];
-  public data: { [key: string]: Object; }[] = [
-    { Name: 'Australia', Code: 'AU' },
-    { Name: 'Bermuda', Code: 'BM' },
-    { Name: 'Canada', Code: 'CA' },
-    { Name: 'Cameroon', Code: 'CM' },
-    { Name: 'Denmark', Code: 'DK' },
-    { Name: 'France', Code: 'FR' },
-    { Name: 'Finland', Code: 'FI' },
-    { Name: 'Germany', Code: 'DE' },
-    { Name: 'Greenland', Code: 'GL' },
-    { Name: 'Hong Kong', Code: 'HK' },
-    { Name: 'India', Code: 'IN' },
-    { Name: 'Italy', Code: 'IT' },
-    { Name: 'Japan', Code: 'JP' },
-    { Name: 'Mexico', Code: 'MX' },
-    { Name: 'Norway', Code: 'NO' },
-    { Name: 'Poland', Code: 'PL' },
-    { Name: 'Switzerland', Code: 'CH' },
-    { Name: 'United Kingdom', Code: 'GB' },
-    { Name: 'United States', Code: 'US' }
-];
+//   public data: { [key: string]: Object; }[] = [
+//     { Name: 'Australia', Code: 'AU' },
+//     { Name: 'Bermuda', Code: 'BM' },
+//     { Name: 'Canada', Code: 'CA' },
+//     { Name: 'Cameroon', Code: 'CM' },
+//     { Name: 'Denmark', Code: 'DK' },
+//     { Name: 'France', Code: 'FR' },
+//     { Name: 'Finland', Code: 'FI' },
+//     { Name: 'Germany', Code: 'DE' },
+//     { Name: 'Greenland', Code: 'GL' },
+//     { Name: 'Hong Kong', Code: 'HK' },
+//     { Name: 'India', Code: 'IN' },
+//     { Name: 'Italy', Code: 'IT' },
+//     { Name: 'Japan', Code: 'JP' },
+//     { Name: 'Mexico', Code: 'MX' },
+//     { Name: 'Norway', Code: 'NO' },
+//     { Name: 'Poland', Code: 'PL' },
+//     { Name: 'Switzerland', Code: 'CH' },
+//     { Name: 'United Kingdom', Code: 'GB' },
+//     { Name: 'United States', Code: 'US' }
+// ];
 
   
   constructor(private fb: FormBuilder, private service: SharedService) { }
@@ -64,15 +64,16 @@ onSubmit(form: NgForm): void {
     {
       this.courses.forEach(element=>
         {
-          // if(id==element.course_id)
-          // {
-          //   this.courseNewArray.push(element);
-          // }
+          if(id==element.course_id)
+          {
+            this.courseNewArray.push(element);
+          }
         })
     });
     console.log("coursenewarray"+this.courseNewArray);
     this.trainer=new Trainer(this.trainerName,this.courseNewArray);
     this.service.sendTrainer(this.trainer).subscribe(data => {
+      this.courseNewArray=[];
       this.ngOnInit();
       this.trainerName="";
       this.value=[];

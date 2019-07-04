@@ -62,11 +62,30 @@ class="province-menu">
 </select> -->
 
 
-<select (change)="onNavigate($event.target.value)">
+<!-- <select (change)="onNavigate($event.target.value)">
   <option value="/view" [selected]="select=='View'">View</option>
   <option value="/course"  [selected]="select=='AddCourse'">Add Course</option>
   <option value="/trainer" [selected]="select=='AddTrainer'">Add Trainer</option>
   <option value="/batch" [selected]="select=='AddBatch'">Add Batch</option>
   
-</select>
+</select> -->
 
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">Course Management</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">Menu
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/view">Schedules</a></li>
+            <li><a routerLink="/course">Courses</a></li>
+            <li><a routerLink="/trainer">Trainers</a></li>
+            <li><a routerLink="/batch">Batch</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>

@@ -31,18 +31,12 @@ import { RouterModule } from '@angular/router';
     MatSelectModule,
     MultiSelectAllModule,
     AngularDateTimePickerModule,
-    RouterModule.forChild([
-      { path: 'view', component: ViewComponent },
-      { path: 'course', component: CmanageComponent },
-      { path: 'trainer', component: TmanageComponent },
-      { path: 'batch', component: FormComponent },
-    ])
-   
-    
-//    BrowserModule,
-    
-    // FormGroup,
-    // FormControl
+    // RouterModule.forChild([
+    //   { path: 'view', component: ViewComponent },
+    //   { path: 'course', component: CmanageComponent },
+    //   { path: 'trainer', component: TmanageComponent },
+    //   { path: 'batch', component: FormComponent },
+    // ])    
   ]
 })
 export class CoursesModule { }

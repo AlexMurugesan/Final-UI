@@ -1,104 +1,97 @@
 <app-header select="AddBatch"></app-header>
+
+
 <div class="container">
-    <h3 style="text-align: center">Add Session</h3>
+
+  <div *ngIf="var4">
+    <h3>Select your Option</h3>
+    <button class="btn btn-sm btn-success" (click)='newBatch()'>New Batch</button><br><br>
+    <button class="btn btn-sm btn-primary" (click)='existingBatch()'>Existing Batch</button>
+  </div>
+
+  <div *ngIf="var5" class="col-sm-4">
+    <h3>Select Batch</h3><br>
+    <select class="form-control" [(ngModel)]="selectedBatch" (change)='add()'>
+      <option *ngFor="let x of batches" value="x.batchName">{{x.batchName}}</option>
+    </select><br>
+    <button class="btn btn-sm btn-danger" (click)='back1()'>Back</button>
+
+  </div>
+  <div *ngIf="var1" class="col-sm-4">
+    <h3>Batch Name</h3><br>
+    <input class="form-control" type="text" id="batchName" [(ngModel)]="batchName"><br>
+    <button class="btn btn-sm btn-success" [disabled]='!batchName' (click)='addBatch()'>Add Batch</button>
+    <button class="btn btn-sm btn-danger" (click)='back()'>Back</button>
+  </div>
+  <div *ngIf="var2">
     <form [formGroup]="TrainerAllocationForm">
-        <div class="row">
-            <div class="col-sm-4">
-            </div>
-            <div class="col-sm-4">
-                <label>Batch Name</label>
-                <input type="text" id="batchName" [(ngModel)]="batchName"/>
-
-                <label>Course Name</label>
-                <select class="form-control" formControlName="course_id" [(ngModel)]="cid" (change)='loadTrainers()'>
-                    <option *ngFor="let x of courses" [value]=x.course_id>{{x.course_name}}</option>
-                </select>
-
-                <label>Trainer Name</label>
-                <select class="form-control" formControlName="trainer_id" [(ngModel)]="tid" (change)='loadBackUp()'>
-                    <option *ngFor="let t of trainers" [value]=t.trainerId>{{t.trainerName}}</option>
-                </select>
-
-                <label>Back-up Trainer</label>
-                <select class="form-control" formControlName="backup_trainer_id">
-                    <option *ngFor="let b of trainersDummy" [value]=b.trainerId>{{b.trainerName}}</option>
-                </select>
-
-                <label>Start Time</label>
-                <angular2-date-picker formControlName="startTime" [(ngModel)]="date" [settings]="settings"
-                style="padding: 0.1rem 0.1rem"></angular2-date-picker>
-                <!-- <input class="form-control" formControlName="startTime" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
-                <owl-date-time #dt></owl-date-time> -->
-
-                <label>End Time</label>
-                <angular2-date-picker formControlName="endTime" [(ngModel)]="date1" [settings]="settings"
-                style="padding: 0.1rem 0.1rem"></angular2-date-picker>
-                <!-- <input class="form-control" formControlName="endTime" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                <owl-date-time #dt1></owl-date-time> -->
-
-                <label>Comments</label>
-                <textarea formControlName="comment" class="md-textarea form-control" rows="3"></textarea>
-
-                <button class="btn btn-danger" [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
-
-            </div>
-            <div class="col-sm-4">
-            </div>
+      <div class="row">
+        <div class="col-sm-4">
         </div>
+        <div class="col-sm-4">
+
+
+          <h3 style="text-align: center">Add Session to {{batchName}}</h3>
+
+          <label>Course Name</label>
+          <select class="form-control" formControlName="course_id" [(ngModel)]="cid" (change)='loadTrainers()'>
+            <option *ngFor="let x of courses" [value]=x.course_id>{{x.course_name}}</option>
+          </select>
+
+          <label>Trainer Name</label>
+          <select class="form-control" formControlName="trainer_id" [(ngModel)]="tid" (change)='loadBackUp()'>
+            <option *ngFor="let t of trainers" [value]=t.trainerId>{{t.trainerName}}</option>
+          </select>
+
+          <label>Back-up Trainer</label>
+          <select class="form-control" formControlName="backup_trainer_id">
+            <option *ngFor="let b of trainersDummy" [value]=b.trainerId>{{b.trainerName}}</option>
+          </select>
+
+          <label>Start Time</label>
+          <angular2-date-picker formControlName="startTime" [(ngModel)]="date" [settings]="settings"
+            style="padding: 0.1rem 0.1rem"></angular2-date-picker>
+
+          <label>End Time</label>
+          <angular2-date-picker formControlName="endTime" [(ngModel)]="date1" [settings]="settings"
+            style="padding: 0.1rem 0.1rem"></angular2-date-picker>
+
+          <label>Comments</label>
+          <textarea formControlName="comment" class="md-textarea form-control" rows="3"></textarea>
+
+          <button class="btn btn-primary" [disabled]="!TrainerAllocationForm.valid" (click)='addRow()'>Add</button>
+
+        </div>
+
+        <div class="col-sm-4">
+        </div>
+      </div>
     </form>
+  </div>
+  <div *ngIf="var3">
 
-
-
-
-
-
-
-    <h3 style="text-align: center">Time Schedule</h3><br>
-    <div>
-    <table class="table table-striped table-bordered">
+    <table class="table table-bordered">
       <thead>
-        <th>Date</th>
-        <th>Course</th>
+        <th>Course Name</th>
+        <th>Trainer Name</th>
+        <th>Backup Trainer</th>
         <th>Start Time</th>
         <th>End Time</th>
-        <th>Trainer</th>
-        <th>Back Up Trainer</th>
         <th>Comments</th>
-        <th>Remove</th>
       </thead>
-      <ng-container *ngFor="let recipient of datewiseSessions | keyvalue">
-        <tr>
-          <td [attr.rowspan]="recipient.value.length">{{recipient.key}}
-          </td>
-          <td>{{recipient.value[0].course.course_name}}</td>
-          <td>{{recipient.value[0].start_time|date:'HH:mm a'}}</td>
-          <td>{{recipient.value[0].end_time|date:'HH:mm a'}}</td>
-          <td>{{recipient.value[0].trainer.trainer_name}}</td>
-          <td><span
-              *ngIf="recipient.value[0].backup_trainer!=undefined">{{recipient.value[0].backupTrainer.trainer_name}}</span>
-          </td>
-          <td>{{recipient.value[0].comment}}</td>
-          <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteCourse(course.course_id)">
-            <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td>
-  
+      <tbody>
+        <tr *ngFor="let a of addToTable">
+          <td>{{a.course_name}}</td>
+          <td>{{a.trainer_name}}</td>
+          <td>{{a.backup_trainer_name}}</td>
+          <td>{{a.startTime}}</td>
+          <td>{{a.endTime}}</td>
+          <td>{{a.comment}}</td>
         </tr>
-        <ng-container *ngFor="let data of recipient.value; let i= index;">
-          <tr *ngIf="i!=0">
-            <td>{{recipient.value[i].course.course_name}}</td>
-            <td>{{recipient.value[i].start_time|date:'h:mm a'}}</td>
-            <td>{{recipient.value[i].end_time|date:'h:mm a'}}</td>
-            <td>{{recipient.value[i].trainer.trainer_name}}</td>
-            <td><span
-                *ngIf="recipient.value[i].backup_trainer!=undefined">{{recipient.value[i].backupTrainer.trainer_name}}</span>
-            </td>
-            <td>{{recipient.value[i].comment}}</td>
-            <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteCourse(course.course_id)">
-              <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td>
-    </tr>
-        </ng-container>
-      </ng-container>
+      </tbody>
     </table>
-  </div>
-  
-</div>
+    <button class="btn btn-danger" [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
 
+
+  </div>
+</div>

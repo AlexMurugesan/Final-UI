@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   }
   course(a:String){
     this.arg=a;
+    console.log("function called");
   }
 
   onNavigate(route:String){

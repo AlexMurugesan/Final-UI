@@ -3,7 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Course, Trainer } from './courses/cmanage/interfaces_req';
-import { TrainerAllocation } from './courses/view/RequiredClasses';
+import { TrainerAllocation, Batch } from './courses/view/RequiredClasses';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ export class SharedService {
   getTrainers_url=this._url+'trainer';
   deleteTrainer_url=this.getTrainers_url+"/" 
   addSessionURL=this._url+'trainerAllocation';
+  addBatch_url=this._url+"batch";
   viewSessionsUrl=this._url+'trainerAllocation';
   deleteRow=this.viewSessionsUrl+'/delete/'
 
@@ -76,6 +77,12 @@ export class SharedService {
       return this.http.get<TrainerAllocation[]>(this.viewSessionsUrl);
     }
   
+    addBatchName(batchName:string)
+    {
+      let batch=new Batch(batchName);
+      console.log(batch);
+      return this.http.post<Batch>(this.addBatch_url,batch,this.httpOptions);
+    }
   
 
   
@@ -103,5 +110,9 @@ export class SharedService {
   {
     console.log("I am alex");
      return this.http.delete(this.deleteRow+tid,this.httpOptions);
+  }
+  getBatches():Observable<Batch[]>
+  {
+    return this.http.get<Batch[]>(this.addBatch_url);
   }
 }

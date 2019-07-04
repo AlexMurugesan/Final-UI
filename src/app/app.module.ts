@@ -11,7 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import * as moment from 'moment';
 import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { AngularDateTimePickerModule} from 'angular2-datetimepicker';
-
+import {HeaderComponent} from '../app/courses/header/header.component';
 
 @NgModule({
   declarations: [

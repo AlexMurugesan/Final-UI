@@ -4,8 +4,8 @@ import { CoursesModule } from './courses/courses.module';
 
 
 const routes: Routes = [
-  {path:'', redirectTo: 'courses',pathMatch:'full'},
-  {path: 'courses', loadChildren: () => CoursesModule}
+  {path:'', redirectTo: 'home',pathMatch:'full'},
+  {path: 'home', loadChildren: () => CoursesModule}
 ];
 
 @NgModule({
