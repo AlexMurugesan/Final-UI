@@ -16,7 +16,15 @@
 
 }
 
-.btn btn-danger
+.button1
 {
-        text-align: center;
+    margin-left: 55px;
+}
+.button2
+{
+    margin-left: 45px;
+}
+.whole
+{
+    margin: auto;
 }

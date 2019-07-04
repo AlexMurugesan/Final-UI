@@ -33,7 +33,7 @@ export class FormComponent implements OnInit {
   var3:boolean=false;
   var4:boolean=true;
   var5:boolean=false;
-  addToTable:TrainerAllocation[]=[];
+  addToTable:any[]=[];
   batch:Batch=new Batch(null);
   datewiseSessions = new Map<string, TrainerAllocation[]>();
   batches:Batch[]=[];
@@ -207,7 +207,7 @@ export class FormComponent implements OnInit {
   }
   deleteRow(t:number)
   {
-    console.log(t);
+    console.log
     this.addToTable.splice(t,1);
   }
 

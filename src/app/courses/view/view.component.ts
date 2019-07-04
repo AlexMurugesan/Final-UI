@@ -85,6 +85,11 @@ export class ViewComponent implements OnInit {
 
     
     }
+    public config:any = {
+        paging: true,
+        filtering: {filterString: ''},
+        className: ['table-striped', 'table-bordered']
+      };
 
     // public sortSessionsByDate(): void {
     //     this.sessions.sort((a: TrainerAllocation, b: TrainerAllocation) => {

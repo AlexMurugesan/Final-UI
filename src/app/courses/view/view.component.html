@@ -1,8 +1,8 @@
 <app-header select="View"></app-header>
 <div class="container">
-  <h2 style="text-align: center">Timesheet</h2><br>
+  <h2 style="margin-left: 450px">Timesheet</h2><br>
 
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <label>Batch :</label>
     <select class="form-control" [(ngModel)]="selectedBatch" (change)='loadSessions()' placeholder="Select Batch">
       <option value="" selected disabled>Select Batch</option>
@@ -11,7 +11,7 @@
   </div><br>
 
   <div *ngIf="var1" style="margin-top: 50px">
-    <table class="table table-bordered">
+    <table class="table table-bordered table-responsive">
       <thead>
         <tr>
           <th>Date</th>
@@ -35,8 +35,6 @@
               *ngIf="recipient.value[0].backup_trainer!=undefined">{{recipient.value[0].backupTrainer.trainer_name}}</span>
           </td>
           <td>{{recipient.value[0].comment}}</td>
-          <!-- <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteCourse(course.course_id)">
-              <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td> -->
 
         </tr>
         <ng-container *ngFor="let data of recipient.value; let i= index;">
@@ -49,15 +47,44 @@
                 *ngIf="recipient.value[i].backup_trainer!=undefined">{{recipient.value[i].backupTrainer.trainer_name}}</span>
             </td>
             <td>{{recipient.value[i].comment}}</td>
-            <!-- <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteSession()">
-                <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td> -->
           </tr>
         </ng-container>
       </ng-container>
     </table>
   </div>
 
-  <div *ngIf="var2" class="select">
-    <img src="../../../assets/Images/noData.jpg"  class="img-fluid" alt="Responsive image">
+  <div *ngIf="var2" >
+    <img class="select" src="../../../assets/Images/noData.jpg"  class="img-fluid" alt="Responsive image">
     </div>
 </div>
+
+<!-- <div class="container">
+    <div class="table-responsive">          
+       <table class="table">
+         <thead>
+           <tr>
+                   <th >UID</th>
+                   <th >FIRSTNAME</th>
+                   <th >LASTNAME</th>
+                   <th >ROLE</th>
+                   <th >GENDER</th>
+                   <th >MAILID</th>
+                   <th >MOBILENO</th>
+                   <th >DOB</th>  
+           </tr>
+         </thead>
+         <tbody>
+               <tr *ngFor="let data of datas" >
+                 <td>{{ data.userId }}</td>
+                 <td>{{ data.firstName }}</td>
+                 <td >{{ data.lastName }}</td>
+                 <td >{{data.role}}</td>
+                 <td >{{ data.gender }}</td>
+                 <td >{{ data.emailId }}</td>
+                 <td >{{data.mobileNo}}</td>
+                 <td >{{ data.dob }}</td> 
+               </tr>
+             </tbody>
+       </table>
+       </div>
+     </div> -->

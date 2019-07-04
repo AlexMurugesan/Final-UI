@@ -14,7 +14,7 @@ import { __values } from 'tslib';
 })
 export class TmanageComponent implements OnInit {
 
-  courses: {}[];
+  courses: any[];
   trainers:Trainer[];
   trainerName:string='';
   selectedCourses:any[]=[];
