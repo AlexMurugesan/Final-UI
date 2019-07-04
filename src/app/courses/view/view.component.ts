@@ -22,16 +22,21 @@ export class ViewComponent implements OnInit {
     // updateTrainer: TrainerAllocation;
     // private popupRef: PopupRef;
     batches:Batch[];
+    oneBatch:Batch;
+    sessions:TrainerAllocation[];
     selectedBatch:number;
     var1:boolean=false;
+    var2:boolean=false;
     //isDisabled=true;
     datePipe = new DatePipe('en-US');
+    datewiseSessions;
     // datewiseSessions = new Map<string, TrainerAllocation[]>();
 
     constructor(private service: SharedService) { }
     ngOnInit() {
         this.service.getBatches().subscribe(data=>{
             this.batches=data;
+            console.log(this.batches);
         })
         // this.service.viewSessions().subscribe(data => {
         //     this.sessions = data;
@@ -45,24 +50,39 @@ export class ViewComponent implements OnInit {
 
     loadSessions()
     {
-        this.var1=true;
-        this.batches[this.selectedBatch].trainerAllocation.sort((a: TrainerAllocation, b: TrainerAllocation) => {
-            return <any>a.start_time - <any>b.start_time;
-        });
-        let datewiseSessions = new Map<string, TrainerAllocation[]>();
-
-        this.batches.forEach(element=>
+        
+        this.datewiseSessions = new Map<string, TrainerAllocation[]>();
+        this.service.getTimesheetForBatch(this.selectedBatch).subscribe(data=>
             {
-                this.batches[this.selectedBatch].trainerAllocation.forEach(element => {
-                    if (datewiseSessions.has(this.datePipe.transform(element.start_time, dateFormat))) {
-                        datewiseSessions.get(this.datePipe.transform(element.start_time, dateFormat)).push(element);
+                this.oneBatch=data;
+                this.sessions=this.oneBatch.trainerAllocation;
+                this.sessions.sort((a: TrainerAllocation, b: TrainerAllocation) => {
+                    return <any>a.start_time - <any>b.start_time;
+                });
+                console.log(this.sessions);
+                
+                this.sessions.forEach(element => {
+                    if (this.datewiseSessions.has(this.datePipe.transform(element.start_time, dateFormat))) {
+                        this.datewiseSessions.get(this.datePipe.transform(element.start_time, dateFormat)).push(element);
                     }
                     else {
-                        datewiseSessions.set(this.datePipe.transform(element.start_time, dateFormat), [element]);
+                        this.datewiseSessions.set(this.datePipe.transform(element.start_time, dateFormat), [element]);
                     }
                 });
-                                     
+
+                if(this.sessions.length!=0)
+                {
+                    this.var2=false;
+                    this.var1=true;
+                }
+                else
+                {
+                    this.var1=false;
+                    this.var2=true;
+                }
+
             })
+
     
     }
 

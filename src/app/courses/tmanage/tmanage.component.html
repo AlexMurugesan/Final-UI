@@ -37,26 +37,25 @@
     <div class="col-sm-7">
       <h3>Trainers' Details</h3><br>
       <div style="overflow-y:auto; max-height: 300px">
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped tableFixHead">
           <thead>
-            <tr>
-              <th>Trainer Name</th>
-              <th>Course name</th>
-              <th>Action</th>
+            <tr style="text-align: center">
+              <th style="text-align: center">Trainer Name</th>
+              <th style="text-align: center">Course name</th>
+              <th style="text-align: center">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let t of trainers">
-              <td rowspan="t.courses.length()">{{t.trainerName}}</td>
+              <td rowspan="t.courses.length()">{{t.trainerName|titlecase}}</td>
               <td>
                 <!-- <table cellpadding="0" cellspacing="0"> -->
-              <tr *ngFor="let c of t.courses">
-                <td>{{c.course_name}}</td>
-              </tr>
+            <tr *ngFor="let c of t.courses">
+              <td>{{c.course_name|titlecase}}</td>
+            </tr>
             <!-- </table> -->
-              </td>
-              <td style="text-align: center"><button class="btn btn-outline-light"
-                (click)="deleteTrainer(t.trainerId)">
+            </td>
+            <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteTrainer(t.trainerId)">
                 <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td>
             </tr>
           </tbody>

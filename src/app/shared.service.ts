@@ -21,6 +21,8 @@ export class SharedService {
   addBatch_url=this._url+"batch";
   viewSessionsUrl=this._url+'trainerAllocation';
   deleteRow=this.viewSessionsUrl+'/delete/'
+  viewTimesheetForBatch=this._url+'trainerAllocation/batch/';
+  updateTimesheetForBatchUrl=this._url+'trainerAllocation/update/'
 
 //  sessionCourses=this._url;
   sessionTrainers=this._url+'trainer/course/';
@@ -83,6 +85,10 @@ export class SharedService {
       console.log(batch);
       return this.http.post<Batch>(this.addBatch_url,batch,this.httpOptions);
     }
+    updateTimesheetForBatch(trainerAllocation:TrainerAllocation[],batchId:number)
+    {
+      return this.http.put(this.updateTimesheetForBatchUrl+batchId,trainerAllocation,this.httpOptions);
+    }
   
 
   
@@ -111,8 +117,16 @@ export class SharedService {
     console.log("I am alex");
      return this.http.delete(this.deleteRow+tid,this.httpOptions);
   }
+
+
+
+
   getBatches():Observable<Batch[]>
   {
     return this.http.get<Batch[]>(this.addBatch_url);
+  }
+  getTimesheetForBatch(batchId:number):Observable<Batch>
+  {
+    return this.http.get<Batch>(this.viewTimesheetForBatch+batchId);
   }
 }

@@ -41,22 +41,17 @@ export class CmanageComponent implements OnInit {
 
     this.courseObj.course_id = null;
     this.courseObj.course_name = this.courseName;
-    this.courseList.forEach(element => {
-      if (this.courseName == element.course_name) {
-        this.alreadyPresent = true;
-      }
-    });
-    if (this.alreadyPresent == false) {
       this.service.addCourse(this.courseObj).subscribe(data => {
         this.ngOnInit();
         this.courseName = "";
         alert("Submitted successfully");
+      },err=>
+      {
+        alert("Duplicate Course");
+        this.courseName='';
       });
 
-    }
-    else {
-      alert("Can't add duplicate course names");
-    }
+
 
   }
 

@@ -3,35 +3,37 @@
 
 <div class="container">
 
-  <div *ngIf="var4">
-    <h3>Select your Option</h3>
-    <button class="btn btn-sm btn-success" (click)='newBatch()'>New Batch</button><br><br>
-    <button class="btn btn-sm btn-primary" (click)='existingBatch()'>Existing Batch</button>
+  <div>
+    <div *ngIf="var4" class="select">
+      <h3>Select your Option</h3><br>
+      <button class="btn btn-sm btn-success" (click)='newBatch()'>New Batch</button><br><br>
+      <button class="btn btn-sm btn-primary" (click)='existingBatch()'>Existing Batch</button>
+    </div>
+
+    <div *ngIf="var5" class="col-sm-4" class="select">
+      <h3>Select Batch</h3><br>
+      <select class="form-control" [(ngModel)]="selectedBatch" (change)='add()'>
+        <option value="" selected disabled>Select Batch</option>
+        <option *ngFor="let x of batches;index as i" [value]="x.batchId">{{x.batchName}}</option>
+      </select><br>
+      <button class="btn btn-sm btn-danger" (click)='back1()'>Back</button>
+
+    </div>
+    <div *ngIf="var1" class="col-sm-4" class="select">
+      <h3>Batch Name</h3><br>
+      <input class="form-control" type="text" id="batchName" [(ngModel)]="batchName"><br>
+      <button class="btn btn-sm btn-success" [disabled]='!batchName' (click)='addBatch()'>Add Batch</button><br><br>
+      <button class="btn btn-sm btn-danger" (click)='back()'>Back</button>
+    </div>
   </div>
 
-  <div *ngIf="var5" class="col-sm-4">
-    <h3>Select Batch</h3><br>
-    <select class="form-control" [(ngModel)]="selectedBatch" (change)='add()'>
-      <option *ngFor="let x of batches" value="x.batchName">{{x.batchName}}</option>
-    </select><br>
-    <button class="btn btn-sm btn-danger" (click)='back1()'>Back</button>
-
-  </div>
-  <div *ngIf="var1" class="col-sm-4">
-    <h3>Batch Name</h3><br>
-    <input class="form-control" type="text" id="batchName" [(ngModel)]="batchName"><br>
-    <button class="btn btn-sm btn-success" [disabled]='!batchName' (click)='addBatch()'>Add Batch</button>
-    <button class="btn btn-sm btn-danger" (click)='back()'>Back</button>
-  </div>
   <div *ngIf="var2">
     <form [formGroup]="TrainerAllocationForm">
       <div class="row">
         <div class="col-sm-4">
         </div>
         <div class="col-sm-4">
-
-
-          <h3 style="text-align: center">Add Session to {{batchName}}</h3>
+          <h3 style="text-align: center">Add Session</h3>
 
           <label>Course Name</label>
           <select class="form-control" formControlName="course_id" [(ngModel)]="cid" (change)='loadTrainers()'>
@@ -57,10 +59,10 @@
             style="padding: 0.1rem 0.1rem"></angular2-date-picker>
 
           <label>Comments</label>
-          <textarea formControlName="comment" class="md-textarea form-control" rows="3"></textarea>
+          <textarea formControlName="comment" class="md-textarea form-control" rows="3"></textarea><br><br>
 
-          <button class="btn btn-primary" [disabled]="!TrainerAllocationForm.valid" (click)='addRow()'>Add</button>
-
+          <button class="btn btn-primary" style="margin-left: 130px" [disabled]="!(cid && tid && date && date1)" (click)='addRow()'>Add</button>
+          <button class="btn btn-danger" (click)='back2()'>Back</button>
         </div>
 
         <div class="col-sm-4">
@@ -69,29 +71,35 @@
     </form>
   </div>
   <div *ngIf="var3">
-
-    <table class="table table-bordered">
+    <h2>Available Sessions</h2>
+    <table class="table table-bordered table-dark">
       <thead>
-        <th>Course Name</th>
-        <th>Trainer Name</th>
-        <th>Backup Trainer</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>Comments</th>
+        <tr>
+          <th>Date</th>
+          <th>Course Name</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Trainer Name</th>
+          <th>Backup Trainer</th>
+          <th>Comments</th>
+          <th>Action</th>
+        </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let a of addToTable">
+        <tr *ngFor="let a of addToTable;index as t">
+          <td>{{a.startTime|date:'dd/MM/yyyy'}}</td>
           <td>{{a.course_name}}</td>
+          <td>{{a.startTime|date:'HH:mm a'}}</td>
+          <td>{{a.endTime|date:'HH:mm a'}}</td>
           <td>{{a.trainer_name}}</td>
           <td>{{a.backup_trainer_name}}</td>
-          <td>{{a.startTime}}</td>
-          <td>{{a.endTime}}</td>
           <td>{{a.comment}}</td>
+          <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteRow(t)">
+              <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td>
         </tr>
       </tbody>
     </table>
-    <button class="btn btn-danger" [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
-
+    <button class="btn btn-danger"   [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
 
   </div>
 </div>

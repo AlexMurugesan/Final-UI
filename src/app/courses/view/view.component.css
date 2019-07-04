@@ -1,4 +1,4 @@
- .s
+ /* .s
 {
     overflow: auto;
     max-height: 300px;
@@ -17,4 +17,12 @@ table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
   bottom: .5em;
+} */
+
+.select
+{
+    /* border: 1px solid black; */
+    margin: 80px 100px 80px 180px;
+    position: relative;
+
 }

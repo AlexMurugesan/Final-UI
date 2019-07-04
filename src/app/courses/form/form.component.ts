@@ -37,11 +37,16 @@ export class FormComponent implements OnInit {
   batch:Batch=new Batch(null);
   datewiseSessions = new Map<string, TrainerAllocation[]>();
   batches:Batch[]=[];
-  selectedBatch:string='';
+  selectedBatch=null;
+  existingBatchSelected=false;
   ngOnInit() {
+    this.addToTable=[];
     this.batchName='';
-
-
+    this.var1=false;
+    this.var2=false;
+    this.var3=false;
+    this.var4=true;
+    this.var5=false;
     this.TrainerAllocationForm = this.fb.group({
       trainer_id: '',
       course_id: '',
@@ -49,6 +54,10 @@ export class FormComponent implements OnInit {
       startTime: this.date,
       endTime: this.date1,
       comment: ''
+    });
+  
+    this.service.getCourses().subscribe(courseData => {
+      this.courses = courseData;
     });
     
   }
@@ -67,6 +76,18 @@ export class FormComponent implements OnInit {
   {
     this.var4=true;
     this.var5=false;
+    this.batchName='';
+    this.ngOnInit();
+    this.batches=[];
+  }
+  back2()
+  {
+    this.var2=false;
+    this.var4=true;
+    this.batchName='';
+    this.selectedBatch='';
+    this.ngOnInit();
+    this.batches=[];
   }
   existingBatch()
   {
@@ -75,12 +96,20 @@ export class FormComponent implements OnInit {
   })
     this.var4=false;
     this.var5=true;
+    this.selectedBatch='';
   }
   add()
   {
-    this.batchName=this.selectedBatch.toUpperCase();
-    this.var2=true;
-    this.var5=false;
+    //this.batchName=this.selectedBatch.toUpperCase();
+    this.service.getTimesheetForBatch(this.selectedBatch).subscribe(data=>
+      {
+        this.convertToDisplayFormat(data.trainerAllocation);
+        this.var2=true;
+        this.var5=false;
+        this.var3=true;
+        this.existingBatchSelected=true;
+      })
+
   }
   addBatch()
   {
@@ -88,21 +117,37 @@ export class FormComponent implements OnInit {
     this.service.addBatchName(this.batchName).subscribe(data=>
       {
         this.batch=data;
-        console.log(this.batch);
         alert(data.batchName+" Batch Added Successfully!!");
-        this.service.getCourses().subscribe(courseData => {
-          this.courses = courseData;
-          console.log(this.courses);
           
           this.var1=false;
           this.var2=true;
-        })
+        
       },err=>{
         console.log(err.status);
         alert("Batch Is already Present");
       })
   }
+  convertToDisplayFormat(trainerAllocation:TrainerAllocation[])
+  {
+    trainerAllocation.forEach(element=>
+      {
+        let x={
+          trainer_allocation_id:element.trainer_allocation_id,
+          course_id:element.course.course_id,
+          trainer_id:element.trainer.trainer_id,
+          backup_trainer_id:element.backupTrainer?element.backupTrainer.trainer_id:null,
+          comment:element.comment,
+          startTime:this.datePipe.transform(element.start_time, 'yyyy-MM-dd HH:mm:ss'),
+          endTime:this.datePipe.transform(element.end_time, 'yyyy-MM-dd HH:mm:ss'),
+          batch_id:this.selectedBatch,
+          course_name:element.course.course_name,
+          trainer_name: element.trainer.trainer_name,
+          backup_trainer_name: element.backupTrainer?element.backupTrainer.trainer_name:null
+          }
+          this.addToTable.push(x);
+      })
 
+  }
   addRow()
   {
     let course_name1:string='';
@@ -127,10 +172,6 @@ export class FormComponent implements OnInit {
       }
     });
 
-    // console.log(course_name);
-    // console.log(trainer_name);
-    // console.log(backup_trainer_name);
-
     let trainerAllocation={
       trainer_allocation_id:this.TrainerAllocationForm.value.trainer_allocation_id,
       course_id:this.TrainerAllocationForm.value.course_id,
@@ -146,14 +187,28 @@ export class FormComponent implements OnInit {
       }
 
       this.addToTable.push(trainerAllocation);
-      console.log(this.addToTable);
-      this.ngOnInit();
       if(this.addToTable.length>0)
       {
         this.var3=true;
       }
+      this.TrainerAllocationForm = this.fb.group({
+        trainer_id: '',
+        course_id: '',
+        backup_trainer_id: '',
+        startTime: this.date,
+        endTime: this.date1,
+        comment: ''
+      });
+      this.cid=null;
+      this.tid=null;
+  
       
 
+  }
+  deleteRow(t:number)
+  {
+    console.log(t);
+    this.addToTable.splice(t,1);
   }
 
   
@@ -189,14 +244,24 @@ export class FormComponent implements OnInit {
     // }
     // console.log(trainerAllocation);
     // console.log(this.TrainerAllocationForm.value);
-    this.service.addSession(this.addToTable).subscribe(data=>
-      {
-        this.ngOnInit();
-        this.var1=true;
-        this.var2=false;
-        this.var3=false;
-        alert(" Timesheet Submitted successfully for batch "+this.batch.batchName);
-      });
+    console.log(this.existingBatchSelected);
+    if(this.existingBatchSelected)
+    {
+      this.service.updateTimesheetForBatch(this.addToTable,this.selectedBatch).subscribe(data=>
+        {
+          this.ngOnInit();
+          alert("Time Sheet Updated sucessfully for batch "+this.batchName);
+        });
+    }
+    else
+    {
+      this.service.addSession(this.addToTable).subscribe(data=>
+        {
+          this.ngOnInit();
+          alert(" Timesheet Submitted successfully for batch "+this.batch.batchName);
+        });
+  
+    }
 
   }
 

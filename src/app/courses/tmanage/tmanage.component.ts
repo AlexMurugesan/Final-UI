@@ -48,13 +48,11 @@ export class TmanageComponent implements OnInit {
   constructor(private fb: FormBuilder, private service: SharedService) { }
   ngOnInit() {
     this.service.getCourses().subscribe(data=>{this.courses=data;
-      console.log(this.courses); 
     });
     
     this.service.getTrainers().subscribe(data => {
     this.trainers= data;  
   }); 
-    console.log(this.courses);
  
 }
 
@@ -78,6 +76,11 @@ onSubmit(form: NgForm): void {
       this.trainerName="";
       this.value=[];
       alert("Submitted successfully");  
+    },err=>
+    {
+      alert("Duplicate Trainer.Can't Add.");
+      this.trainerName='';
+      this.value=[];
     });
 
 
@@ -118,8 +121,14 @@ public onFiltering: EmitType<FilteringEventArgs> = (e: FilteringEventArgs) => {
     //   this.courseNewArray.push(this.courses[element]);
     // });    
     this.trainer=new Trainer(trainerName,this.courseNewArray);
-    this.service.sendTrainer(this.trainer).subscribe(data => console.log(data));
-    this.ngOnInit();
+    this.service.sendTrainer(this.trainer).subscribe(data => {
+      console.log(data);
+      this.ngOnInit();
     alert("Submitted successfully");
+    },err=>
+    {
+      alert("Duplicate Trainer.Can't Add.")
+    });
+    
   }
 }

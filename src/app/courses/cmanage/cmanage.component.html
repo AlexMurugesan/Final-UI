@@ -13,18 +13,18 @@
 
     <div class="col-sm-7">
       <h3>Available Courses</h3><br>
-      <div style="overflow-y:auto; max-height: 400px">  
+      <div style="overflow-y:auto; max-height: 350px">  
 
-        <table class="table table-bordered table-striped">
-          <thead class>
+        <table class="table table-bordered tableFixHead">
+          <thead class="thead-dark">
             <tr>
-              <th  style="text-align: center">Course Name</th>
-              <th  style="text-align: center">Action</th>
+              <th style="text-align: center">Course Name</th>
+              <th style="text-align: center">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let course of courseList">
-              <td style="text-align: center">{{course.course_name}}</td>
+            <tr *ngFor="let course of courseList" style="text-transform: capitalize">
+              <td style="text-align: center">{{course.course_name|titlecase}}</td>
               <td style="text-align: center"><button class="btn btn-outline-light" (click)="deleteCourse(course.course_id)">
                   <i class="fa fa-trash-o" style="color:red;font-size:15px"></i></button></td>
             </tr>

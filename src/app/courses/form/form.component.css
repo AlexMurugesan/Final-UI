@@ -1,0 +1,22 @@
+.name
+{ 
+    width:80%;
+    height:80%;
+    position:fixed;
+    left:50%;
+    top:50%;
+    margin:-100px 0 0 -150px;
+}
+.select
+{
+    position:fixed;
+    left:50%;
+    top:50%;
+    margin:-100px 0 0 -150px;
+
+}
+
+.btn btn-danger
+{
+        text-align: center;
+}
