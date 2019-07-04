@@ -3,11 +3,33 @@
 
 <div class="container">
 
-  <div class="whole">
-    <div *ngIf="var4" class="select">
-      <h3>Select your Option</h3><br>
-      <button class="btn btn-sm btn-success button1" (click)='newBatch()'>New Batch</button><br><br>
-      <button class="btn btn-sm btn-primary button2" (click)='existingBatch()'>Existing Batch</button>
+  <div>
+    <div *ngIf="var4" class="optionIcons">
+        <h1 style="text-align: center">Batch</h1><br>
+        <a (click)='newBatch()'>
+        <div class="polaroid1">
+            <img class="iconImage" src="../../../assets/Images/add.svg" alt="Add Batch" style="width:100%">
+            <div class="textContainer">
+            <p>Add A New Batch</p>
+            </div>
+        </div>
+        </a>
+        <a (click)='existingBatch()'>
+        <div class="polaroid2">
+            <img class="iconImage"  src="../../../assets/Images/modify.svg" alt="Norther Lights" style="width:100%">
+            <div class="textContainer">
+            <p>Modify Existing Batch</p>
+            </div>
+        </div>
+        </a>
+
+
+
+      <!-- <h3>Select your Option</h3><br> -->
+      <!-- <a (click)='newBatch()'><img src="../../../assets/Images/add.png"></a>
+      <a (click)='existingBatch()'><img src="../../../assets/Images/modify.svg"></a> -->
+      <!-- <button class="btn btn-sm center-block btn-success" (click)='newBatch()'>New Batch</button><br>
+      <button class="btn btn-sm center-block btn-primary" (click)='existingBatch()'>Existing Batch</button> -->
     </div>
 
     <div *ngIf="var5" class="col-sm-6" class="select">
@@ -16,6 +38,7 @@
         <option value="" selected disabled>Select Batch</option>
         <option *ngFor="let x of batches;index as i" [value]="x.batchId">{{x.batchName}}</option>
       </select><br>
+<<<<<<< HEAD
       <button class="btn btn-sm btn-danger" style="margin-left: 50px" (click)='back1()'>Back</button>
 
     </div>
@@ -24,6 +47,16 @@
       <input class="form-control" type="text" id="batchName" [(ngModel)]="batchName" placeholder="Enter the batch name"><br>
       <button class="btn btn-sm btn-success newBatch" [disabled]='!batchName' (click)='addBatch()'>Add Batch</button><br><br>
       <button class="btn btn-sm btn-danger newBatch" style="margin-left: 85px" (click)='back()'>Back</button>
+=======
+      <button class="btn btn-sm btn-danger center-block " (click)='back1()'>Back</button>
+
+    </div>
+    <div *ngIf="var1" class="col-sm-4" class="select">
+      <h3>Batch Name</h3><br>
+      <input class="form-control" type="text" id="batchName" [(ngModel)]="batchName"><br>
+      <button class="btn btn-sm center-block btn-success" [disabled]='!batchName' (click)='addBatch()'>Add Batch</button><br>
+      <button class="btn btn-sm center-block btn-danger" (click)='back()'>Back</button>
+>>>>>>> 15214edaad2fb8ff6275a7f8faa902622ea1e3de
     </div>
   </div>
 
@@ -60,11 +93,17 @@
 
           <label>Comments</label>
           <textarea formControlName="comment" class="md-textarea form-control" rows="3"></textarea><br><br>
+<<<<<<< HEAD
 
           <button class="btn btn-primary" style="margin-left: 130px" 
           [disabled]="(TrainerAllocationForm.value.course_id=='' || tid==0 )" 
           (click)='addRow()'>Add</button>
+=======
+          <div class="btn-group">
+          <button class="btn btn-primary" style="margin-left: 130px" [disabled]="!(cid && tid && date && date1)" (click)='addRow()'>Add</button>
+>>>>>>> 15214edaad2fb8ff6275a7f8faa902622ea1e3de
           <button class="btn btn-danger" (click)='back2()'>Back</button>
+        </div>
         </div>
 
         <div class="col-sm-4">
@@ -102,9 +141,13 @@
         </tr>
       </tbody>
     </table>
+<<<<<<< HEAD
     <br>
 </div><br>
 <button class="btn btn-danger" style="margin-left: 540px"  [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
+=======
+    <button class="btn btn-success center-block "   [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
+>>>>>>> 15214edaad2fb8ff6275a7f8faa902622ea1e3de
 
   </div>
 </div>

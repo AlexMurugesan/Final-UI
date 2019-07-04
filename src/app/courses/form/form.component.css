@@ -16,6 +16,7 @@
 }
 .newBatch
 {
+<<<<<<< HEAD
     margin-left: 70px;
 }
 
@@ -25,3 +26,36 @@
 table  { border-collapse: collapse; width: 100%; }
 th, td { padding: 8px 16px; }
 th     { background: black; color: white }
+=======
+    margin: auto;
+}
+
+div.polaroid1 {
+    width: 20%;
+    float: left;
+    height: 1%;
+    margin-left: 20%;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+  }
+  img.imageIcon
+  {
+      background-color: white;
+  }
+  div.polaroid2 {
+    width: 20%;
+    height: 10%;
+    float: right;
+    margin-right: 20%;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+  }
+  div.textContainer {
+    text-align: center;
+    padding: 10px 20px;
+  }
+>>>>>>> 15214edaad2fb8ff6275a7f8faa902622ea1e3de

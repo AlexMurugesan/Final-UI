@@ -48,12 +48,12 @@ export class FormComponent implements OnInit {
     this.var4=true;
     this.var5=false;
     this.TrainerAllocationForm = this.fb.group({
-      trainer_id: '',
-      course_id: '',
-      backup_trainer_id: '',
+      trainer_id: undefined,
+      course_id: undefined,
+      backup_trainer_id: undefined,
       startTime: this.date,
       endTime: this.date1,
-      comment: ''
+      comment: undefined
     });
     this.service.getCourses().subscribe(courseData => {
       this.courses = courseData;
@@ -100,8 +100,10 @@ export class FormComponent implements OnInit {
   add()
   {
     //this.batchName=this.selectedBatch.toUpperCase();
+    
     this.service.getTimesheetForBatch(this.selectedBatch).subscribe(data=>
       {
+        console.log(this.selectedBatch);
         this.convertToDisplayFormat(data.trainerAllocation);
         this.var2=true;
         this.var5=false;
@@ -138,7 +140,7 @@ export class FormComponent implements OnInit {
           comment:element.comment,
           startTime:this.datePipe.transform(element.start_time, 'yyyy-MM-dd HH:mm:ss'),
           endTime:this.datePipe.transform(element.end_time, 'yyyy-MM-dd HH:mm:ss'),
-          batch_id:this.selectedBatch,
+          batch_id:this.selectedBatch*1,
           course_name:element.course.course_name,
           trainer_name: element.trainer.trainer_name,
           backup_trainer_name: element.backupTrainer?element.backupTrainer.trainer_name:null
@@ -179,7 +181,7 @@ export class FormComponent implements OnInit {
       comment:this.TrainerAllocationForm.value.comment,
       startTime:this.datePipe.transform(this.TrainerAllocationForm.value.startTime, 'yyyy-MM-dd HH:mm:ss'),
       endTime:this.datePipe.transform(this.TrainerAllocationForm.value.endTime, 'yyyy-MM-dd HH:mm:ss'),
-      batch_id:this.batch.batchId,
+      batch_id:this.existingBatchSelected?this.selectedBatch:this.batch.batchId,
       course_name: course_name1,
       trainer_name: trainer_name1,
       backup_trainer_name: backup_trainer_name1
@@ -247,11 +249,13 @@ export class FormComponent implements OnInit {
     // console.log(trainerAllocation);
     // console.log(this.TrainerAllocationForm.value);
     console.log(this.existingBatchSelected);
+    console.log(this.addToTable);
     if(this.existingBatchSelected)
     {
       this.service.updateTimesheetForBatch(this.addToTable,this.selectedBatch).subscribe(data=>
         {
           this.ngOnInit();
+          this.existingBatchSelected=false;
           alert("Time Sheet Updated sucessfully for batch "+this.batchName);
         });
     }

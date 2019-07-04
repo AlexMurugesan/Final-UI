@@ -1,8 +1,12 @@
 <app-header select="View"></app-header>
 <div class="container">
+<<<<<<< HEAD
   <h2 style="margin-left: 510px">Timesheet</h2><br>
+=======
+  <h2 class="text-center">Timesheet</h2><br>
+>>>>>>> 15214edaad2fb8ff6275a7f8faa902622ea1e3de
 
-  <div class="col-sm-3">
+  <div class="col-md-3">
     <label>Batch :</label>
     <select class="form-control" [(ngModel)]="selectedBatch" (change)='loadSessions()' placeholder="Select Batch">
       <!-- <option value="" selected disabled>Select Batch</option> -->
@@ -62,6 +66,13 @@
         </tr>
       </tbody>
     </table>
+<<<<<<< HEAD
+=======
+  </div>
+
+  <div *ngIf="var2" class="text-center">
+    <img class="select" src="../../../assets/Images/noData.jpg"  class="rounded mx-auto d-block" alt="Responsive image">
+>>>>>>> 15214edaad2fb8ff6275a7f8faa902622ea1e3de
     </div>
   </div>
 
