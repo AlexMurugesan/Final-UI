@@ -4,10 +4,32 @@
 <div class="container">
 
   <div>
-    <div *ngIf="var4" class="select">
-      <h3>Select your Option</h3><br>
-      <button class="btn btn-sm center-block btn-success" (click)='newBatch()'>New Batch</button><br>
-      <button class="btn btn-sm center-block btn-primary" (click)='existingBatch()'>Existing Batch</button>
+    <div *ngIf="var4" class="optionIcons">
+        <h1 style="text-align: center">Batch</h1><br>
+        <a (click)='newBatch()'>
+        <div class="polaroid1">
+            <img class="iconImage" src="../../../assets/Images/add.svg" alt="Add Batch" style="width:100%">
+            <div class="textContainer">
+            <p>Add A New Batch</p>
+            </div>
+        </div>
+        </a>
+        <a (click)='existingBatch()'>
+        <div class="polaroid2">
+            <img class="iconImage"  src="../../../assets/Images/modify.svg" alt="Norther Lights" style="width:100%">
+            <div class="textContainer">
+            <p>Modify Existing Batch</p>
+            </div>
+        </div>
+        </a>
+
+
+
+      <!-- <h3>Select your Option</h3><br> -->
+      <!-- <a (click)='newBatch()'><img src="../../../assets/Images/add.png"></a>
+      <a (click)='existingBatch()'><img src="../../../assets/Images/modify.svg"></a> -->
+      <!-- <button class="btn btn-sm center-block btn-success" (click)='newBatch()'>New Batch</button><br>
+      <button class="btn btn-sm center-block btn-primary" (click)='existingBatch()'>Existing Batch</button> -->
     </div>
 
     <div *ngIf="var5" class="col-sm-4" class="select">
