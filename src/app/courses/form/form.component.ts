@@ -48,12 +48,12 @@ export class FormComponent implements OnInit {
     this.var4=true;
     this.var5=false;
     this.TrainerAllocationForm = this.fb.group({
-      trainer_id: '',
-      course_id: '',
-      backup_trainer_id: '',
+      trainer_id: undefined,
+      course_id: undefined,
+      backup_trainer_id: undefined,
       startTime: this.date,
       endTime: this.date1,
-      comment: ''
+      comment: undefined
     });
   
     this.service.getCourses().subscribe(courseData => {
@@ -182,7 +182,7 @@ export class FormComponent implements OnInit {
       comment:this.TrainerAllocationForm.value.comment,
       startTime:this.datePipe.transform(this.TrainerAllocationForm.value.startTime, 'yyyy-MM-dd HH:mm:ss'),
       endTime:this.datePipe.transform(this.TrainerAllocationForm.value.endTime, 'yyyy-MM-dd HH:mm:ss'),
-      batch_id:this.selectedBatch,
+      batch_id:this.existingBatchSelected?this.selectedBatch:this.batch.batchId,
       course_name: course_name1,
       trainer_name: trainer_name1,
       backup_trainer_name: backup_trainer_name1
@@ -253,6 +253,7 @@ export class FormComponent implements OnInit {
       this.service.updateTimesheetForBatch(this.addToTable,this.selectedBatch).subscribe(data=>
         {
           this.ngOnInit();
+          this.existingBatchSelected=false;
           alert("Time Sheet Updated sucessfully for batch "+this.batchName);
         });
     }
