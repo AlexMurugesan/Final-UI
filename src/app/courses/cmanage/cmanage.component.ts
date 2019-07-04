@@ -40,7 +40,7 @@ export class CmanageComponent implements OnInit {
   submit() {
 
     this.courseObj.course_id = null;
-    this.courseObj.course_name = this.courseName;
+    this.courseObj.course_name = this.courseName.toLowerCase();
       this.service.addCourse(this.courseObj).subscribe(data => {
         this.ngOnInit();
         this.courseName = "";

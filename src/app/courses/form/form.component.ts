@@ -24,8 +24,8 @@ export class FormComponent implements OnInit {
   courses: Course[] = [];
   trainers: Trainer[];
   trainersDummy: Trainer[] = [];
-  cid: number;
-  tid: any;
+  cid: number=0;
+  tid: number=0;
   date: Date=new Date();
   date1:Date=new Date();
   var1:boolean=false;
@@ -55,7 +55,6 @@ export class FormComponent implements OnInit {
       endTime: this.date1,
       comment: ''
     });
-  
     this.service.getCourses().subscribe(courseData => {
       this.courses = courseData;
     });
@@ -199,8 +198,8 @@ export class FormComponent implements OnInit {
         endTime: this.date1,
         comment: ''
       });
-      this.cid=null;
-      this.tid=null;
+      // this.cid=null;
+      // this.tid=null;
   
       
 
@@ -221,6 +220,9 @@ export class FormComponent implements OnInit {
   }
 
   loadTrainers() {
+    this.TrainerAllocationForm.value.trainer_id='';
+    console.log(this.tid);
+    console.log(this.TrainerAllocationForm.value.trainer_id);
     this.service.getTrainerList(this.cid).subscribe(data => {
       this.trainers = data;
     })

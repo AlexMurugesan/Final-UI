@@ -38,6 +38,8 @@ export class ViewComponent implements OnInit {
             this.batches=data;
             console.log(this.batches);
         })
+        this.selectedBatch=24;
+        this.loadSessions();
         // this.service.viewSessions().subscribe(data => {
         //     this.sessions = data;
         //     // console.log(this.sessions);
@@ -50,6 +52,7 @@ export class ViewComponent implements OnInit {
 
     loadSessions()
     {
+        console.log(this.selectedBatch);
         
         this.datewiseSessions = new Map<string, TrainerAllocation[]>();
         this.service.getTimesheetForBatch(this.selectedBatch).subscribe(data=>

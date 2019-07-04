@@ -1,18 +1,19 @@
 <app-header select="View"></app-header>
 <div class="container">
-  <h2 style="margin-left: 450px">Timesheet</h2><br>
+  <h2 style="margin-left: 510px">Timesheet</h2><br>
 
   <div class="col-sm-3">
     <label>Batch :</label>
     <select class="form-control" [(ngModel)]="selectedBatch" (change)='loadSessions()' placeholder="Select Batch">
-      <option value="" selected disabled>Select Batch</option>
+      <!-- <option value="" selected disabled>Select Batch</option> -->
       <option *ngFor="let x of batches; index as i" [value]="x.batchId">{{x.batchName}}</option>
     </select><br><br>
   </div><br>
 
   <div *ngIf="var1" style="margin-top: 50px">
-    <table class="table table-bordered table-responsive">
-      <thead>
+    <div>
+    <table class="table table-bordered table-responsive tableFixHead">
+      <thead >
         <tr>
           <th>Date</th>
           <th>Course</th>
@@ -23,68 +24,48 @@
           <th>Comments</th>
         </tr>
       </thead>
-      <ng-container *ngFor="let recipient of datewiseSessions | keyvalue">
-        <tr>
-          <td [attr.rowspan]="recipient.value.length">{{recipient.key}}
-          </td>
-          <td>{{recipient.value[0].course.course_name}}</td>
-          <td>{{recipient.value[0].start_time|date:'HH:mm a'}}</td>
-          <td>{{recipient.value[0].end_time|date:'HH:mm a'}}</td>
-          <td>{{recipient.value[0].trainer.trainer_name}}</td>
-          <td><span
-              *ngIf="recipient.value[0].backup_trainer!=undefined">{{recipient.value[0].backupTrainer.trainer_name}}</span>
-          </td>
-          <td>{{recipient.value[0].comment}}</td>
-
+      <tbody>
+        <tr *ngFor="let recipient of datewiseSessions | keyvalue" style="text-transform: capitalize">
+          <td rowspan="recipient.value.length">{{recipient.key}}</td>
+          <td>
+        <tr *ngFor="let data of recipient.value; let i= index;">
+          <td>{{recipient.value[i].course.course_name}}</td>
         </tr>
-        <ng-container *ngFor="let data of recipient.value; let i= index;">
-          <tr *ngIf="i!=0">
-            <td>{{recipient.value[i].course.course_name}}</td>
+        </td>
+        <td>
+          <tr *ngFor="let data of recipient.value; let i= index;">
             <td>{{recipient.value[i].start_time|date:'h:mm a'}}</td>
+          </tr>
+        </td>
+        <td>
+          <tr *ngFor="let data of recipient.value; let i= index;">
             <td>{{recipient.value[i].end_time|date:'h:mm a'}}</td>
+          </tr>
+        </td>
+        <td>
+          <tr *ngFor="let data of recipient.value; let i= index;">
             <td>{{recipient.value[i].trainer.trainer_name}}</td>
-            <td><span
-                *ngIf="recipient.value[i].backup_trainer!=undefined">{{recipient.value[i].backupTrainer.trainer_name}}</span>
-            </td>
+          </tr>
+        </td>
+        <td>
+          <tr *ngFor="let data of recipient.value; let i= index;">
+            <td *ngIf="recipient.value[i].backup_trainer!=undefined;">{{recipient.value[i].backupTrainer.trainer_name}}</td>
+            <td *ngIf="recipient.value[i].backup_trainer==undefined;">NA</td>
+
+          </tr>
+        </td>
+        <td>
+          <tr *ngFor="let data of recipient.value; let i= index;">
             <td>{{recipient.value[i].comment}}</td>
           </tr>
-        </ng-container>
-      </ng-container>
+        </td>
+        </tr>
+      </tbody>
     </table>
+    </div>
   </div>
 
-  <div *ngIf="var2" >
-    <img class="select" src="../../../assets/Images/noData.jpg"  class="img-fluid" alt="Responsive image">
-    </div>
+  <div *ngIf="var2" class="select">
+    <img src="../../../assets/Images/noData.jpg" class="img-fluid" alt="Responsive image" height="300" width="300">
+  </div>
 </div>
-
-<!-- <div class="container">
-    <div class="table-responsive">          
-       <table class="table">
-         <thead>
-           <tr>
-                   <th >UID</th>
-                   <th >FIRSTNAME</th>
-                   <th >LASTNAME</th>
-                   <th >ROLE</th>
-                   <th >GENDER</th>
-                   <th >MAILID</th>
-                   <th >MOBILENO</th>
-                   <th >DOB</th>  
-           </tr>
-         </thead>
-         <tbody>
-               <tr *ngFor="let data of datas" >
-                 <td>{{ data.userId }}</td>
-                 <td>{{ data.firstName }}</td>
-                 <td >{{ data.lastName }}</td>
-                 <td >{{data.role}}</td>
-                 <td >{{ data.gender }}</td>
-                 <td >{{ data.emailId }}</td>
-                 <td >{{data.mobileNo}}</td>
-                 <td >{{ data.dob }}</td> 
-               </tr>
-             </tbody>
-       </table>
-       </div>
-     </div> -->

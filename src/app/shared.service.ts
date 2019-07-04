@@ -87,6 +87,7 @@ export class SharedService {
     }
     updateTimesheetForBatch(trainerAllocation:TrainerAllocation[],batchId:number)
     {
+      console.log(trainerAllocation);
       return this.http.put(this.updateTimesheetForBatchUrl+batchId,trainerAllocation,this.httpOptions);
     }
   

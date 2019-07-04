@@ -69,7 +69,7 @@ onSubmit(form: NgForm): void {
         })
     });
     console.log("coursenewarray"+this.courseNewArray);
-    this.trainer=new Trainer(this.trainerName,this.courseNewArray);
+    this.trainer=new Trainer(this.trainerName.toUpperCase(),this.courseNewArray);
     this.service.sendTrainer(this.trainer).subscribe(data => {
       this.courseNewArray=[];
       this.ngOnInit();

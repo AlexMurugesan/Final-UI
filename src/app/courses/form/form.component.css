@@ -1,21 +1,11 @@
-.name
-{ 
-    width:80%;
-    height:80%;
-    position:fixed;
-    left:50%;
-    top:50%;
-    margin:-100px 0 0 -150px;
-}
 .select
 {
     position:fixed;
     left:50%;
     top:50%;
-    margin:-100px 0 0 -150px;
+    margin:-100px 0 0 -100px;
 
 }
-
 .button1
 {
     margin-left: 55px;
@@ -24,7 +14,14 @@
 {
     margin-left: 45px;
 }
-.whole
+.newBatch
 {
-    margin: auto;
+    margin-left: 70px;
 }
+
+.tableFixHead          { overflow-y: auto; height: 100px; }
+.tableFixHead thead th { position: sticky; top: 0; }
+
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background: black; color: white }
